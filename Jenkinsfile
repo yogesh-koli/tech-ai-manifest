@@ -6,16 +6,18 @@ pipeline {
     stages {
         stage('Push to GitHub') {
             steps {
-                withCredentials([string(credentialsId: 'github', variable: 'TOKEN')]) {
+                withCredentials([usernamePassword(credentialsId: 'github', usernameVariable: 'GIT_USER', passwordVariable: 'GIT_PASS')]) {
                     sh """
+                        sh 'git remote set-url origin https://$GIT_USER:$GIT_PASS@github.com/your-username/your-repo.git'
                         git config --global user.email "you@example.com"
                         git config --global user.name "Your Name"
                         git add .
                         git commit -m "Automated commit from Jenkins"
-                        git push https://yogesh koli:$TOKEN@github.com/yogesh/kubernetesmanifest.git HEAD:master
+                        git push origin master
+                       
+                        
                     """
                 }
             }
         }
-    }
-}
+    
