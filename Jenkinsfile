@@ -1,28 +1,21 @@
-node {
-    def app
-
-    stage('Clone repository') {
-      
-
-        checkout scm
+pipeline {
+    agent any
+    environment {
+        GIT_REPO = "https://github.com/yogesh/kubernetesmanifest.git"
     }
-
-    stage('Update GIT') {
-            script {
-                catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
-                    withCredentials([usernamePassword(credentialsId: 'github', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
-                        //def encodedPassword = URLEncoder.encode("$GIT_PASSWORD",'UTF-8')
-                        sh "git config user.email yogi@gmail.com"
-                        sh "git config user.name yogi"
-                        //sh "git switch master"
-                        sh "cat deployment.yaml"
-                        sh "sed -i 's+yogik001/tech-ai-dok.*+yogik001/tech-ai-dok:${DOCKERTAG}+g' deployment.yaml"
-                        sh "cat deployment.yaml"
-                        sh "git add ."
-                        sh "git commit -m 'Done by Jenkins Job changemanifest: ${env.BUILD_NUMBER}'"
-                        sh "git push https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/${GIT_USERNAME}/kubernetesmanifest.git HEAD:master"
-      }
+    stages {
+        stage('Push to GitHub') {
+            steps {
+                withCredentials([string(credentialsId: 'github-token', variable: 'TOKEN')]) {
+                    sh """
+                        git config --global user.email "you@example.com"
+                        git config --global user.name "Your Name"
+                        git add .
+                        git commit -m "Automated commit from Jenkins"
+                        git push https://yogesh koli:$TOKEN@github.com/yogesh/kubernetesmanifest.git HEAD:master
+                    """
+                }
+            }
+        }
     }
-  }
-}
 }
