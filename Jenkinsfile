@@ -4,7 +4,7 @@ pipeline {
         GIT_REPO = "https://github.com/yogesh/kubernetesmanifest.git"
     }
     stages {
-        stage('Push to GitHub') {
+        stage('Push to GitHub')  {
             steps {
                 withCredentials([usernamePassword(credentialsId: 'github', usernameVariable: 'GIT_USER', passwordVariable: 'GIT_PASS')]) {
                     sh """
