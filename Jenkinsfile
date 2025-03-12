@@ -6,7 +6,7 @@ pipeline {
     stages {
         stage('Push to GitHub') {
             steps {
-                withCredentials([string(credentialsId: 'github-token', variable: 'TOKEN')]) {
+                withCredentials([string(credentialsId: 'github', variable: 'TOKEN')]) {
                     sh """
                         git config --global user.email "you@example.com"
                         git config --global user.name "Your Name"
