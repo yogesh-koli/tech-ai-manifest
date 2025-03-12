@@ -8,17 +8,15 @@ pipeline {
             steps {
                 withCredentials([usernamePassword(credentialsId: 'github', usernameVariable: 'GIT_USER', passwordVariable: 'GIT_PASS')]) {
                     sh """
-                        sh 'git remote set-url origin https://$GIT_USER:$GIT_PASS@github.com/your-username/your-repo.git'
+                        git remote set-url origin https://$GIT_USER:$GIT_PASS@github.com/yogesh/kubernetesmanifest.git
                         git config --global user.email "you@example.com"
                         git config --global user.name "Your Name"
                         git add .
-                        git commit -m "Automated commit from Jenkins"
+                        git commit -m "Automated commit from Jenkins" || echo "No changes to commit"
                         git push origin master
-                       
-                        
                     """
                 }
             }
         }
-    
+    }
 }
