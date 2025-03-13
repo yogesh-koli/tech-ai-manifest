@@ -16,7 +16,7 @@ pipeline {
             git checkout -b master || git checkout master
             git add .
             git commit -m "Automated commit from Jenkins" || echo "No changes to commit"
-            git push --set-upstream origin master
+            git push --set-upstream https://github.com/yogesh-koli/tech-ai-manifest.git master
         """
     }
 }
