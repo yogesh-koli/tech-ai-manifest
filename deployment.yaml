@@ -18,7 +18,7 @@ spec:
         app: flaskdemo
     spec:
       containers:
-      - image: yogik001/tech-ai-dok
+      - image: tech-repo/tech-img
         name: flaskdemo
         resources: {}
 status: {}
