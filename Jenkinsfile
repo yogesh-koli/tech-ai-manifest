@@ -7,6 +7,9 @@ pipeline {
         stage('Push to GitHub') {
             steps {
                 withCredentials([usernamePassword(credentialsId: 'github', usernameVariable: 'GIT_USER', passwordVariable: 'GIT_PASS')]) {
+    sh "git push https://${GIT_USER}:${GIT_PASS}@github.com/yogesh-koli/tech-ai-manifest.git master"
+}
+
     script {
         def safeGitUser = GIT_USER.replaceAll(' ', '%20') // Encode spaces in username if needed
         sh """
@@ -24,4 +27,4 @@ pipeline {
             }
         }
     }
-}
+
