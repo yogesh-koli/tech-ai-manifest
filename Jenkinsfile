@@ -15,7 +15,7 @@ pipeline {
                             git config --global user.name "Your Name"
                             git add .
                             git commit -m "Automated commit from Jenkins" || echo "No changes to commit"
-                            git push origin master
+                            git push https://github.com/yogesh-koli/tech-ai-manifest.git master
                         """
                     }
                 }
