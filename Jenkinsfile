@@ -7,7 +7,7 @@ pipeline {
         stage('Push to GitHub') {
             steps {
                 withCredentials([usernamePassword(credentialsId: 'github', usernameVariable: 'GIT_USER', passwordVariable: 'GIT_PASS')]) {
-    sh "git push https://yogesh%20koli:****@github.com/yogesh-koli/tech-ai-manifest.git master"
+    sh "git push https://yogesh%20koli:****@github.com/tech-ai-manifest.git master"
 }
 
     script {
