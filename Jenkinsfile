@@ -1,7 +1,7 @@
 pipeline {
     agent any
     environment {
-        GIT_REPO = "https://github.com/yogesh/kubernetesmanifest.git"
+        GIT_REPO = " https://github.com/yogesh-koli/tech-ai-manifest.git"
     }
     stages {
         stage('Push to GitHub') {
